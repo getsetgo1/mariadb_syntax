@@ -187,4 +187,4 @@ hset product:1 stock 40
 # 특정 요소의 값을 증가(감소시키려면 -값 주면 됨)
 hincrby product:1 stock 5
 
-# 후엥
+#히엥
