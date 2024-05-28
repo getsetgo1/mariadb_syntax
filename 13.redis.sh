@@ -151,8 +151,38 @@ rpush 배
 rpush 사과 # list로 넣었을 경우 봤던 거 또 보는 게 문제가 됨 -> Set으로 해결 -> 중복 제거&&순서 : sorted set (자바에는 tree set이 있음)
 RPOP
 rpop
+# zset 중복 제거되고 set에서 안되는 정렬도 됨
 # zset(sorted set)
 zadd zmembers 3 member1
 zadd zmembers 4 member2
 zadd zmembers 1 member3
 zadd zmembers 2 member4
+
+# score 기준 오름차순 정렬
+zrange zmembers 0 -1
+# score 기준 내림차순 정렬
+zrevrange zmembers 0 -1
+
+# zset 삭제
+zrem zmembers member2
+# zrank는 해당 멤버가 index 몇번째인지 출력
+zrank zmembers member2
+
+# 최근 본 상품 목록 sorted set(zset)으로 구현
+zadd recent:products 192411 apple
+zadd recent:products 192413 apple
+zadd recent:products 192415 banana
+zadd recent:products 192420 orange
+zadd recent:products 192430 apple
+zrevrange recent:products 0 2
+
+# hashes
+hset product:1 name "apple" price 1000 stock 50
+hget product:1 name이나 price나 stock
+# 모든 객체값 전체 get 
+hgetall product:1
+# 특정요소값 수정
+hset product:1 stock 40
+
+# 특정 요소의 값을 증가(감소시키려면 -값 주면 됨)
+hincrby product:1 stock 5
